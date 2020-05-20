@@ -429,7 +429,7 @@
     }
 
     targetBodyClass.on('keyup', 'input,textarea', function (event) {
-        $('#form-submit').prop('disabled',false);
+        $('#form-submit').prop('disabled', false);
         submitMSG(true, "")
     });
 
