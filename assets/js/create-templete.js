@@ -34,7 +34,7 @@
                                 ${item.description}
                             </p>
                             <div class="mh-about-tag wow fadeInUp" data-wow-duration="0.8s" data-wow-delay="0.3s">
-                                <ul id="work-${item.name.replaceAll(" ","-").toLowerCase()}">
+                                <ul id="work-${item.name.replaceAll(" ", "-").toLowerCase()}">
                                 
                                 </ul>
                             </div>
@@ -43,19 +43,19 @@
                 `;
             })
             $("#" + $el).after(templete)
-            worklist.forEach(item =>{
-                const {name,tags} = item;
+            worklist.forEach(item => {
+                const { name, tags } = item;
                 let tagList = '';
                 tags.forEach(item => {
                     tagList += `<li><span>${item}</span></li>`
                 })
-                $("#work-"+name.replaceAll(" ","-").toLowerCase()).html(tagList)
+                $("#work-" + name.replaceAll(" ", "-").toLowerCase()).html(tagList)
             })
         }
-        function createEducationList($el,educationList){
+        function createEducationList($el, educationList) {
             let education = '';
             educationList.forEach(item => {
-                const {title,institution,passingYear,result} = item
+                const { title, institution, passingYear, result } = item
                 education += `
                      <div class="mh-education-item dark-bg wow fadeInUp" data-wow-duration="0.8s"
                                  data-wow-delay="0.3s">
@@ -68,8 +68,8 @@
             })
             $("#" + $el).html(education)
         }
-        $.getJSON('index.json', function (data) {
-            console.log({data})
+        $.getJSON('../assets/data/information.json', function (data) {
+            console.log({ data })
             const {
                 name,
                 position,
@@ -94,8 +94,8 @@
             createSocialLink("socialLinks", socialLinks)
             createSkillList("skillList", skillList)
             $("#cvDownloadLink").prop('href', cvDownloadLink)
-            createWorkList("workHistories",workHistories)
-            createEducationList("educationList",educationList)
+            createWorkList("workHistories", workHistories)
+            createEducationList("educationList", educationList)
         })
     })
 })(jQuery)
