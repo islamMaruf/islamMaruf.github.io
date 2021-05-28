@@ -379,30 +379,27 @@
     function submitForm() {
         let firstName = $("input[name='first_name']").val();
         let lastName = $("input[name='last_name']").val();
-        let email = $("input[name='email']").val();
-        let subject = "mail from islammaruf.github.io";
-        let message = $("textarea[name='message']").val();
         let name = firstName + ' ' + lastName;
-        let data = `name=${name}&_replyto=${email}&subject=${subject}&message=${message}`;
-        let encodeData = encodeURI(data);
-        $('#form-submit').prop('disabled',true);
-        $.ajax({
-            type: "POST",
-            url: "https://formspree.io/maypnqgk",
-            data: encodeData,
-            dataType: "json",
-            success: function (response) {
-                if (response.ok) {
-                    formSuccess();
-                } else {
-                    formError();
-                    submitMSG(false, "Do you fill your from correctly ?");
-                }
-            },
-            error : function (response) {
-                formError();
-                submitMSG(false, "Do you fill your from correctly ?");
-            }
+        let email = $("input[name='email']").val();
+        let subject = `Email From ${name} [islammaruf.github.io]`
+        let message = $("textarea[name='message']").val();
+        $('#form-submit').prop('disabled', true);
+        let _token = "f34742e7-9459-4a22-a7cd-cd3f8f7762dc"
+        Email.send({
+            SecureToken: _token,
+            To: "marufislam7424@gmail.com",
+            From: email,
+            Subject: subject,
+            Body: message,
+
+        }).then(response => {
+            formSuccess();
+            console.log(response)
+        }
+        ).catch(err => {
+            formError();
+            submitMSG(false, "Do you fill your from correctly ?");
+            console.log(err)
         });
     }
 
@@ -438,23 +435,23 @@
     | SET NIGHT THEME DEPENDING ON TIME
     |=================
     */
-    function isDay() {
-        const hours = (new Date()).getHours();
-        return (hours >= 6 && hours < 18);
-    }
+    // function isDay() {
+    //     const hours = (new Date()).getHours();
+    //     return (hours >= 6 && hours < 18);
+    // }
 
 
-    if (isDay()) {
-        if (targetBodyClass.hasClass("dark-vertion")) {
-            targetBodyClass.removeClass("dark-vertion")
-        }
-        targetBodyClass.addClass("white-vertion")
-    } else {
-        if (targetBodyClass.hasClass("white-vertion")) {
-            targetBodyClass.removeClass("white-vertion")
-        }
-        targetBodyClass.addClass('dark-vertion')
-    }
+    // if (isDay()) {
+    //     if (targetBodyClass.hasClass("dark-vertion")) {
+    //         targetBodyClass.removeClass("dark-vertion")
+    //     }
+    //     targetBodyClass.addClass("white-vertion")
+    // } else {
+    //     if (targetBodyClass.hasClass("white-vertion")) {
+    //         targetBodyClass.removeClass("white-vertion")
+    //     }
+    //     targetBodyClass.addClass('dark-vertion')
+    // }
 
 
 }(jQuery));
